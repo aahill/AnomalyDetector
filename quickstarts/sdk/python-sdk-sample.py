@@ -63,15 +63,13 @@ try:
         for i in range(len(response.is_anomaly)):
             if response.is_anomaly[i]:
                 print(i)
-except Exception as e:
-    if isinstance(e, APIErrorException):
-        print('Error code: {}'.format(e.error.additional_properties['error']['code']),
-            '\nError message: {}'.format(e.error.additional_properties['error']['message']))
     else:
-        print(e)
+        print('No anomalies were detected in the time series.')
 
-else:
-    print('No anomalies were detected in the time series.')
+except APIErrorException as e:
+    print('Error code: {}'.format(e.error.additional_properties['error']['code']),
+        '\nError message: {}'.format(e.error.additional_properties['error']['message']))
+
 # </detectAnomaliesBatch>
 
 # Detect the anomaly status of the latest data point
@@ -85,10 +83,8 @@ try:
         print('The latest point is detected as anomaly.')
     else:
         print('The latest point is not detected as anomaly.')
-except Exception as e:
-    if isinstance(e, APIErrorException):
-        print('Error code: {}'.format(e.error.additional_properties['error']['code']),
-            '\nError message: {}'.format(e.error.additional_properties['error']['message']))
-    else:
-        print(e)
+except APIErrorException as e:
+    print('Error code: {}'.format(e.error.additional_properties['error']['code']),
+        '\nError message: {}'.format(e.error.additional_properties['error']['message']))
+
 # </latestPointDetection>
